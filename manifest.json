@@ -1,0 +1,17 @@
+{
+  "manifest_version": 3,
+  "name": "ReferenceMemo",
+  "version": "1.0",
+  "description": "選択したテキストをURL付きでワンクリックで保存する技術メモ帳",
+  "permissions": [
+    "contextMenus",
+    "storage",
+    "tabs"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_popup": "popup.html"
+  }
+}
