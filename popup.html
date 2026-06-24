@@ -3,67 +3,25 @@
 <head>
   <meta charset="UTF-8">
   <style>
-    /* 全体のサイズと背景 */
-    body { 
-      width: 350px; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; 
-      padding: 12px; margin: 0; background-color: #f1f3f5; 
-    }
+    /* （昨日のCSSはそのままなので省略します。変更はありません！） */
+    body { width: 350px; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; padding: 12px; margin: 0; background-color: #f1f3f5; }
     h3 { margin-top: 0; color: #212529; border-bottom: 2px solid #e9ecef; padding-bottom: 8px; font-size: 16px; }
-    
-    /* メモを並べるリスト（最大高さを指定してスクロール可能に） */
     #memo-list { list-style: none; padding: 0; margin: 0; max-height: 380px; overflow-y: auto; }
-    
-    /* メモ1件ごとの「カード型」デザイン */
-    .memo-card { 
-      background: #ffffff; border: 1px solid #dee2e6; border-radius: 6px; 
-      padding: 10px; margin-bottom: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-      position: relative;
-    }
-    
-    /* 選択したテキスト（メインのメモ内容） */
-    .memo-text { 
-      font-size: 13px; color: #343a40; line-height: 1.4; 
-      margin-bottom: 6px; white-space: pre-wrap; word-break: break-all;
-    }
-    
-    /* 引用元のリンク（細文字でスマートに） */
-    .memo-source { 
-      font-size: 11px; color: #495057; text-decoration: none;
-      display: inline-block; max-width: 280px; white-space: nowrap; 
-      overflow: hidden; text-overflow: ellipsis;
-    }
+    .memo-card { background: #ffffff; border: 1px solid #dee2e6; border-radius: 6px; padding: 10px; margin-bottom: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); position: relative; }
+    .memo-text { font-size: 13px; color: #343a40; line-height: 1.4; margin-bottom: 6px; white-space: pre-wrap; word-break: break-all; }
+    .memo-source { font-size: 11px; color: #495057; text-decoration: none; display: inline-block; max-width: 280px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
     .memo-source:hover { text-decoration: underline; color: #228be6; }
-    
-    /* メモの右上の×ボタン（個別削除用） */
-    .delete-btn { 
-      position: absolute; top: 8px; right: 8px; 
-      cursor: pointer; color: #adb5bd; font-size: 12px; font-weight: bold;
-      user-select: none; transition: color 0.2s;
-    }
+    .delete-btn { position: absolute; top: 8px; right: 8px; cursor: pointer; color: #adb5bd; font-size: 12px; font-weight: bold; user-select: none; transition: color 0.2s; }
     .delete-btn:hover { color: #fa5252; }
-    
-    /* メモが空の時のメッセージ */
     #empty-message { text-align: center; color: #868e96; padding: 30px 0; font-size: 13px; }
   </style>
 </head>
 <body>
   <h3>ReferenceMemo 📝</h3>
   
-  <p id="empty-message" style="display: none;">ストックされたリファレンスはありません</p>
+  <p id="empty-message">ストックされたリファレンスはありません</p>
   
-  <ul id="memo-list">
-    <li class="memo-card">
-      <div class="delete-btn">×</div>
-      <div class="memo-text">const currentBaseUrl = sanitizedBoardUrl.endsWith("/") ? sanitizedBoardUrl : sanitizedBoardUrl + "/";</div>
-      <a href="https://github.com" target="_blank" class="memo-source">🔗 5ch.io Viewer 開発ドキュメント</a>
-    </li>
-    
-    <li class="memo-card">
-      <div class="delete-btn">×</div>
-      <div class="memo-text">contexts: ["selection"] を指定すると、文字をドラッグして選択している時だけメニューを出現させることができます。</div>
-      <a href="https://developer.chrome.com" target="_blank" class="memo-source">🔗 Chrome Extensions API リファレンス</a>
-    </li>
-  </ul>
+  <ul id="memo-list"></ul>
 
   <script src="popup.js"></script>
 </body>
