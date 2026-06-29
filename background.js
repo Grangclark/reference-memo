@@ -41,3 +41,12 @@ chrome.contextMenus.onClicked.addListener((info, tab) => {
     });
   }
 });
+
+// 3. ★【今日の一撃】拡張機能アイコンがクリックされたら大画面タブを開く
+chrome.action.onClicked.addListener((tab) => {
+  // 自分の拡張機能内にある「list.html」のフルURLをブラウザに作らせる
+  const listPageUrl = chrome.runtime.getURL("list.html");
+
+  // そのURLを新しいタブとしてバックグラウンドではなく「前面（アクティブ）」で開く
+  chrome.tabs.create({ url: listPageUrl, active: true });
+});

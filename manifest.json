@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "ReferenceMemo",
-  "version": "1.1",
+  "version": "1.2", // バージョンを少し上げます
   "description": "選択したテキストをURL付きでワンクリックで保存する技術メモ帳",
   "permissions": [
     "contextMenus",
@@ -13,6 +13,7 @@
     "service_worker": "background.js"
   },
   "action": {
-    "default_popup": "popup.html"
+    // 👑【ポップアップを停止する一撃】
+    // default_popup を削除し、空のオブジェクトにします。これでクリックイベントを background.js で検知できるようになります！
   }
 }
