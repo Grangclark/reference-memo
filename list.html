@@ -4,56 +4,74 @@
   <meta charset="UTF-8">
   <title>ReferenceMemo - ストック一覧 📋</title>
   <style>
-    /* 大画面用に最適化したスタイリング */
+    /* 全体のベース設定（より洗練されたダーク気味の背景） */
     body { 
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; 
-      padding: 30px; margin: 0; background-color: #f8f9fa; color: #212529;
+      padding: 40px 20px; margin: 0; background-color: #f8f9fa; color: #212529;
     }
     
+    /* 大画面での中央寄せコンテナ（はみ出さないように最大幅を画面に追従させます） */
     .container {
-      max-width: 800px; margin: 0 auto;
+      max-width: 90%;  /* ★画面全体の90%に収めることで、はみ出しを絶対に防ぐ */
+      margin: 0 auto;
     }
 
+    /* タイトルのデザイン（ここは既存のままでOKです） */
     h2 { 
-      margin-top: 0; border-bottom: 3px solid #dee2e6; padding-bottom: 12px; font-size: 24px; 
+      margin-top: 0; margin-bottom: 24px; border-bottom: 2px solid #dee2e6; 
+      padding-bottom: 16px; font-size: 26px; color: #343a40; display: flex; align-items: center; gap: 8px;
     }
     
-    #memo-list { list-style: none; padding: 0; margin: 0; }
+    /* 👑【画面を超えさせない、真・中央揃えの2列グリッド】 */
+    #memo-list { 
+      list-style: none; padding: 0; margin: 0; 
+      display: grid; 
+      /* ★横幅が狭いときは1列、広いときは「最大450pxのカードが均等に2列」並ぶように自動可変させます */
+      grid-template-columns: repeat(auto-fit, minmax(300px, 450px)); 
+      gap: 20px;          /* カード同士の隙間を少し広げて見やすく */
+      justify-content: center; /* ★これで2列全体が、画面の「ど真ん中」にピタッと中央揃えになります！ */
+    }
     
-    /* 大画面で見栄えが良いように少し余白を広げたカード型 */
+    /* 大画面向けに余白と立体感をアップさせたカード型 */
     .memo-card { 
-      background: #ffffff; border: 1px solid #dee2e6; border-radius: 8px; 
-      padding: 16px; margin-bottom: 12px; box-shadow: 0 2px 4px rgba(0,0,0,0.02);
-      position: relative; transition: transform 0.15s, box-shadow 0.15s;
+      background: #ffffff; border: 1px solid #e9ecef; border-radius: 10px; 
+      padding: 18px; box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+      position: relative; transition: all 0.2s ease;
+      display: flex; flex-direction: column; justify-content: space-between;
     }
+    /* マウスを乗せたときにふわっと浮き上がる演出を強化 */
     .memo-card:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 16px rgba(0,0,0,0.06);
+      border-color: #ced4da;
     }
     
-    /* 選択テキスト（フォントを少し大きく見やすく） */
+    /* 選択テキスト（フォントサイズと行間を読みやすく調整） */
     .memo-text { 
-      font-size: 15px; color: #343a40; line-height: 1.5; 
-      margin-bottom: 10px; white-space: pre-wrap; word-break: break-all;
+      font-size: 14px; color: #343a40; line-height: 1.6; 
+      margin-bottom: 14px; white-space: pre-wrap; word-break: break-all;
     }
     
-    /* 引用元リンク */
+    /* 引用元リンク（カードの最下部に綺麗に固定されるように配置） */
     .memo-source { 
-      font-size: 12px; color: #495057; text-decoration: none;
+      font-size: 12px; color: #6c757d; text-decoration: none;
       display: inline-block; max-width: 90%; white-space: nowrap; 
       overflow: hidden; text-overflow: ellipsis;
+      margin-top: auto; /* どんなにテキストが短くても下部に揃う魔法 */
     }
     .memo-source:hover { text-decoration: underline; color: #228be6; }
     
-    /* 右上の削除ボタン（押しやすいように調整） */
+    /* 右上の削除ボタン（少し大きく、かつ上品な薄グレーに） */
     .delete-btn { 
       position: absolute; top: 12px; right: 14px; 
-      cursor: pointer; color: #adb5bd; font-size: 14px; font-weight: bold;
+      cursor: pointer; color: #adb5bd; font-size: 16px; font-weight: bold;
       user-select: none; transition: color 0.2s;
+      padding: 4px;
     }
     .delete-btn:hover { color: #fa5252; }
     
-    #empty-message { text-align: center; color: #868e96; padding: 50px 0; font-size: 15px; }
+    /* メモが空の時のメッセージ */
+    #empty-message { text-align: center; color: #868e96; padding: 60px 0; font-size: 16px; }
   </style>
 </head>
 <body>
